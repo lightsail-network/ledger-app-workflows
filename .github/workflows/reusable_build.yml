@@ -43,6 +43,11 @@ on:
         required: false
         default: 'ledger-app-builder-lite'
         type: string
+      builder_tag:
+        description: "The tag of the docker image to build the application in (defaults to latest)"
+        required: false
+        default: 'latest'
+        type: string
 
 jobs:
   call_get_app_metadata:
@@ -65,7 +70,7 @@ jobs:
         device: ${{ fromJSON(needs.call_get_app_metadata.outputs.compatible_devices) }}
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/ledgerhq/ledger-app-builder/${{ inputs.builder }}:latest
+      image: ghcr.io/ledgerhq/ledger-app-builder/${{ inputs.builder }}:${{ inputs.builder_tag }}
 
     steps:
       - name: Clone
