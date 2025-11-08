@@ -159,6 +159,11 @@ jobs:
           repository: ${{ inputs.app_repository }}
           ref: ${{ inputs.app_branch_name }}
           submodules: recursive
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
 
       - name: Set binary path
         id: "set_binary_path"
