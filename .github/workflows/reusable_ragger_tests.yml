@@ -143,7 +143,7 @@ jobs:
       fail-fast: false
       matrix:
         device: ${{ fromJSON(needs.call_get_app_metadata.outputs.compatible_devices) }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     container: ${{ inputs.container_image != '' && inputs.container_image || null }}
 
     steps:
@@ -315,7 +315,7 @@ jobs:
   merge_pytest_logs:
     name: Merge pytest logs
     needs: ragger_tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: ${{ inputs.capture_file != '' }}
     steps:
       - uses: actions/download-artifact@v4
@@ -339,7 +339,7 @@ jobs:
     # Merge matrix output
     name: Merge snapshots artifacts
     needs: ragger_tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/upload-artifact/merge@v4
         if: ${{ needs.ragger_tests.outputs.snapshot_artifact_uploaded == 'true' }}
